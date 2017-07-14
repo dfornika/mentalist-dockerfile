@@ -24,3 +24,22 @@ RUN mkdir $JULIA_PATH \
 
 
 ENV PATH $JULIA_PATH/bin:$PATH
+
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends \
+        build-essential \
+	hdf5-tools \
+	libxml2
+
+ENV JULIA_PKGDIR $JULIA_PATH/share/julia/site
+
+RUN mkdir /tool
+RUN mkdir /tool/.OpenGene
+
+ENV HOME /tool
+
+RUN julia -e 'Pkg.init()'
+RUN julia -e 'Pkg.add("Bio")'
+RUN julia -e 'Pkg.add("OpenGene")'
+RUN julia -e 'Pkg.add("Logging")'
+RUN julia -e 'Pkg.add("ArgParse")'
