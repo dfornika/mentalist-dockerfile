@@ -22,7 +22,6 @@ RUN mkdir $JULIA_PATH \
 	&& tar -xzf julia.tar.gz -C $JULIA_PATH --strip-components 1 \
 	&& rm -rf /var/lib/apt/lists/* julia.tar.gz*
 
-
 ENV PATH $JULIA_PATH/bin:$PATH
 
 RUN apt-get update \
@@ -33,13 +32,15 @@ RUN apt-get update \
 
 ENV JULIA_PKGDIR $JULIA_PATH/share/julia/site
 
-RUN mkdir /tool
-RUN mkdir /tool/.OpenGene
-
-ENV HOME /tool
+RUN mkdir /tools
+WORKDIR /tools
+RUN git clone https://github.com/WGS-TB/MentaLiST.git
+ENV HOME /tools/MentaLiST
+RUN mkdir $HOME/.OpenGene
 
 RUN julia -e 'Pkg.init()'
 RUN julia -e 'Pkg.add("Bio")'
 RUN julia -e 'Pkg.add("OpenGene")'
 RUN julia -e 'Pkg.add("Logging")'
 RUN julia -e 'Pkg.add("ArgParse")'
+RUN julia -e 'Pkg.add("Lumberjack")'
