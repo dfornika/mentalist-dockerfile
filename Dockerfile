@@ -40,9 +40,9 @@ WORKDIR /tmp
 RUN curl -sSL -o MentaLiST-${MENTALIST_VERSION}.tar.gz https://github.com/WGS-TB/MentaLiST/archive/v${MENTALIST_VERSION}.tar.gz
 RUN tar -xvzf MentaLiST-${MENTALIST_VERSION}.tar.gz
 WORKDIR /tools
-RUN cp -r /tmp/MentaLiST .
+RUN cp -r /tmp/MentaLiST-${MENTALIST_VERSION} mentalist
 
-ENV HOME /tools/MentaLiST
+ENV HOME /tools/mentalist
 RUN mkdir $HOME/.OpenGene
 
 RUN julia -e 'Pkg.init()'
