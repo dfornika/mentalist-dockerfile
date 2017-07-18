@@ -51,3 +51,5 @@ RUN julia -e 'Pkg.add("OpenGene")'
 RUN julia -e 'Pkg.add("Logging")'
 RUN julia -e 'Pkg.add("ArgParse")'
 RUN julia -e 'Pkg.add("Lumberjack")'
+RUN julia -e 'Pkg.add("Suppressor")'
+
