@@ -7,7 +7,7 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV JULIA_PATH /usr/local/julia
-ENV JULIA_VERSION 0.5.2
+ENV JULIA_VERSION 0.6.1
 
 RUN mkdir $JULIA_PATH \
 	&& apt-get update && apt-get install -y curl \
@@ -34,7 +34,7 @@ ENV JULIA_PKGDIR $JULIA_PATH/share/julia/site
 
 RUN mkdir /tools
 
-ENV MENTALIST_VERSION 0.1.1
+ENV MENTALIST_VERSION 0.2.1
 
 WORKDIR /tmp
 RUN curl -sSL -o MentaLiST-${MENTALIST_VERSION}.tar.gz https://github.com/WGS-TB/MentaLiST/archive/v${MENTALIST_VERSION}.tar.gz
@@ -51,5 +51,6 @@ RUN julia -e 'Pkg.add("OpenGene")'
 RUN julia -e 'Pkg.add("Logging")'
 RUN julia -e 'Pkg.add("ArgParse")'
 RUN julia -e 'Pkg.add("Lumberjack")'
-RUN julia -e 'Pkg.add("Suppressor")'
-
+RUN julia -e 'Pkg.add("FastaIO")'
+RUN julia -e 'Pkg.add("JLD")'
+RUN julia -e 'Pkg.add("DataStructures")'
